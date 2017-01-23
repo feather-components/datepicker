@@ -3,6 +3,8 @@
     font-size: 14px;
     font-family: Tahoma,Helvetica Neue,Hiragino Sans GB,Microsoft Yahei,sans-serif;
     color: #666;
+    border: 1px solid #5986E1;
+    border-radius: 3px;
 }
 
 .ui3-timepicker a{
@@ -15,38 +17,48 @@
     line-height: 25px;
     text-align: center;
     position: relative;
+    background: #F6F6F6;
+    margin-bottom: 5px;
 }
 
 .ui3-timepicker-selector-closer{
     position: absolute;
-    right: 15px;
+    right: 0px;
     top: 0px;
-    width: 10px;
+    width: 25px;
     height: 25px;
     display: inline-block;
 }
 
-.ui3-timepicker-selector{
-    padding: 1px 0px 8px 1px;
+.ui3-timepicker-selector-wraper{
+    margin: 5px 1px;
 }
 
 .ui3-timepicker-si{
-    width: 15px;
-    height: 16px;
-    line-height: 16px;
+    width: 24px;
+    height: 19px;
+    line-height: 19px;
     display: inline-block;
     text-align: center;
-    margin-left: 8px;
-    margin-top: 7px;
     font-size: 12px;
 }
 
-.ui3-timepicker-selector-hours{
-    padding: 0px;
+.ui3-timepicker-si.ui3-timepicker-si-selected{
+    color: #FF8447;
+}
+
+.ui3-timepicker-si:hover{
+    color: #FF8447;
+}
+
+.ui3-timepicker-selector-hours .ui3-timepicker-selector-wraper{
+    margin: 6px 0px;
 }
 
 .ui3-timepicker-selector-hours .ui3-timepicker-si{
-    margin: 12px;
+    width: 39px;
+    height: 30px;
+    line-height: 30px;
 }
 
 .ui3-timepicker-vs input{
@@ -59,6 +71,7 @@
     padding: 0px;
     border: 0px;
     outline: none;
+    cursor: pointer;
 }
 
 .ui3-timepicker-vs i{

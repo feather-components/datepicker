@@ -17,8 +17,12 @@
 <body>
 <div id="test"></div>
 <script>
-new $.fn.timepicker({
+var t = new $.fn.timepicker({
     container: '#test'
+});
+
+t.on('select', function(event, v){
+    console.log(v);
 });
 </script>
 </body>
