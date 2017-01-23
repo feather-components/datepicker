@@ -73,6 +73,7 @@ var TimePicker = Class.$factory('timepicker', {
         }
 
         self.$inputs = self.$wraper.find('input');
+        self.$selector = self.$wraper.find('ui3-timepicker-selector');
     },
 
     createSelector: function(type/*0|1|2*/){
@@ -88,18 +89,16 @@ var TimePicker = Class.$factory('timepicker', {
             htmls.push('<a href="javascript:" class="ui3-timepicker-si ' + (i == v ? 'ui3-timepicker-si-selected' : '') + '" data-type="' + type + '" data-value="' + txt + '">' + txt + '</a>');
         }
 
-        var $selector = self.$wraper.find('.ui3-timepicker-selector').show();
-
         htmls = '<div class="ui3-timepicker-selector-title"><a href="javascript:" class="ui3-timepicker-selector-closer">&times;</a>' + TimePicker.TYPES[type] + '</div>'
                 + '<div class="ui3-timepicker-selector-wraper">'
                 + htmls.join('')
                 + '</div>';
-        $selector.html(htmls);
+        self.$selector.html(htmls).show();
 
         if(type == 0){
-            $selector.addClass('ui3-timepicker-selector-hours');
+            self.$selector.addClass('ui3-timepicker-selector-hours');
         }else{
-            $selector.removeClass('ui3-timepicker-selector-hours');
+            self.$selector.removeClass('ui3-timepicker-selector-hours');
         }
     },
 
@@ -109,7 +108,7 @@ var TimePicker = Class.$factory('timepicker', {
         if(self.$overlay){
             self.$overlay.open();
         }else{
-            self.$wraper.find('.ui3-timepicker-selector').show();
+            self.$selector.show();
         }
     },
 
@@ -119,7 +118,7 @@ var TimePicker = Class.$factory('timepicker', {
         if(self.$overlay){
             self.$overlay.close();
         }else{
-            self.$wraper.find('.ui3-timepicker-selector').hide();
+            self.$selector.hide();
         }
     },
 
