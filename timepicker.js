@@ -30,11 +30,13 @@ var TimePicker = Class.$factory('timepicker', {
         var self = this;
 
         self.$wraper.delegate('.ui3-timepicker-si', 'click', function(){
-            var $item = $(this);
+            var $item = $(this), type = Number($item.attr('data-type'));
 
             self.$wraper.find('.ui3-timepicker-si').removeClass('ui3-timepicker-si-selected');
             $item.addClass('ui3-timepicker-si-selected');
-            self.$inputs.eq($item.attr('data-type')).val($item.attr('data-value'));
+            self.$inputs.eq(type).val($item.attr('data-value'));
+
+            type < 2 && self.$inputs.eq(type + 1).click();
         });
 
         self.$inputs.each(function(index){
@@ -73,7 +75,7 @@ var TimePicker = Class.$factory('timepicker', {
         }
 
         self.$inputs = self.$wraper.find('input');
-        self.$selector = self.$wraper.find('ui3-timepicker-selector');
+        self.$selector = self.$wraper.children(':first');
     },
 
     createSelector: function(type/*0|1|2*/){
@@ -93,6 +95,7 @@ var TimePicker = Class.$factory('timepicker', {
                 + '<div class="ui3-timepicker-selector-wraper">'
                 + htmls.join('')
                 + '</div>';
+
         self.$selector.html(htmls).show();
 
         if(type == 0){
