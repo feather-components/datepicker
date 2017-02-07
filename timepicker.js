@@ -1,81 +1,78 @@
 ;(function(factory){
 if(typeof define == 'function' && define.amd){
     //seajs or requirejs environment
-    define(['jquery', 'class', 'overlay'], factory);
+    define(['jquery', 'class', './picker'], factory);
 }else if(typeof module === 'object' && typeof module.exports == 'object'){
     module.exports = factory(
         require('jquery'),
         require('class'),
-        require('overlay')
+        require('./picker')
     );
 }else{
-    window.jQuery.fn.timepicker = factory(window.jQuery, window.jQuery.klass, window.jQuery.overlay);
+    factory(window.jQuery, window.jQuery.klass, window.jQuery.picker);
 }
-})(function($, Class, Overlay){
+})(function($, Class, Picker){
 
-var TimePicker = Class.$factory('timepicker', {
+var TimePicker = Class.$factory('timepicker', Picker, {
     initialize: function(options){
-        this.options = $.extend({
-            container: document.body,
-            dom: null,
-            selectedClassName: ''
+        var options = $.extend({
+            selectedClassName: '',
+            disabled: []
         }, options || {});
 
-        this.create();
-        this.createSelector();
-        this.initEvent();
+        this._super(options);
     },
 
     initEvent: function(){
         var self = this;
 
-        self.$wraper.delegate('.ui3-timepicker-si', 'click', function(){
-            var $item = $(this), type = Number($item.attr('data-type'));
+        self._super.initEvent.call(self);
 
-            self.$wraper.find('.ui3-timepicker-si').removeClass('ui3-timepicker-si-selected');
+        self.$picker.delegate('.ui3-timepicker-si', 'click', function(){
+            var $item = $(this), type = Number($item.attr('data-type')), val = $item.attr('data-value');
+
+            self.$picker.find('.ui3-timepicker-si').removeClass('ui3-timepicker-si-selected');
             $item.addClass('ui3-timepicker-si-selected');
-            self.$inputs.eq(type).val($item.attr('data-value'));
+            self.$inputs.eq(type).val(val);
 
             type < 2 && self.$inputs.eq(type + 1).click();
+            self.trigger('select', [val, type]);
         });
 
         self.$inputs.each(function(index){
             $(this).click(function(){
-                self.createSelector(index);
+                !$(this).is(':disabled') && self.createSelector(index);
             });
         });
 
-        self.$wraper.delegate('.ui3-timepicker-selector-closer', 'click', function(){
+        self.$picker.delegate('.ui3-timepicker-selector-closer', 'click', function(){
             self.close();
         });
 
-        self.$wraper.find('.ui3-timepicker-confirm').click(function(){
-            self.trigger('select', self.getTime());
+        self.$picker.find('.ui3-timepicker-confirm').click(function(){
+            var time = self.getTime();
+
+            self.trigger('submit', time);
+            self.$dom && self.$dom.val(time);
+            self.close();
         });
     },
 
     create: function(){
         var self = this, options = self.options;
 
-        self.$wraper = $('\
-            <div class="ui3-timepicker">\
-                <div class="ui3-timepicker-selector"></div>\
-                <div class="ui3-timepicker-vs">\
-                    <input type="text" class="ui3-timepicker-hours" readonly value="00" /><i>:</i><input type="text" class="ui3-timepicker-minutes" readonly value="00" /><i>:</i><input type="text" class="ui3-timepicker-seconds" readonly value="00" />\
-                    <a href="javascript:" class="ui3-timepicker-confirm">确定</a>\
-                </div>\
+        self._super.create.call(self);
+        self.$picker.addClass('ui3-timepicker').html('\
+            <div class="ui3-timepicker-selector"></div>\
+            <div class="ui3-timepicker-vs">\
+                <input type="text" class="ui3-timepicker-hours" readonly value="00" /><i>:</i><input type="text" class="ui3-timepicker-minutes" readonly value="00" /><i>:</i><input type="text" class="ui3-timepicker-seconds" readonly value="00" />\
+                <a href="javascript:" class="ui3-timepicker-confirm">确定</a>\
             </div>\
         ');
 
-        if(Overlay.isDocumentOrBody(options.container)){
-            self.$overlay = new Overlay();
-            self.$overlay.setContent(self.$wraper);
-        }else{
-            self.$wraper.appendTo(options.container);
-        }
-
-        self.$inputs = self.$wraper.find('input');
-        self.$selector = self.$wraper.children(':first');
+        self.$inputs = self.$picker.find('input');
+        self.$selector = self.$picker.children(':first');
+        self.disable(options.disabled);
     },
 
     createSelector: function(type/*0|1|2*/){
@@ -103,26 +100,14 @@ var TimePicker = Class.$factory('timepicker', {
         }else{
             self.$selector.removeClass('ui3-timepicker-selector-hours');
         }
-    },
 
-    open: function(){
-        var self = this;
-
-        if(self.$overlay){
-            self.$overlay.open();
-        }else{
-            self.$selector.show();
-        }
+        self.resetPosition();
     },
 
     close: function(){
         var self = this;
-
-        if(self.$overlay){
-            self.$overlay.close();
-        }else{
-            self.$selector.hide();
-        }
+        self._super.close.call(self);
+        !self.$overlay && self.$selector.hide();
     },
 
     getTime: function(type){
@@ -139,9 +124,43 @@ var TimePicker = Class.$factory('timepicker', {
         }else{
             return self.$inputs.eq(type).val();
         }
+    },
+
+    disable: function(type){
+        var self = this;
+
+        $.each(TimePicker.formatTypes(type), function(key, item){
+            self.$inputs.eq(item).attr('disabled', 'disabled');
+        });
+    },
+
+    enable: function(type){
+        var self = this;
+
+        $.each(TimePicker.formatTypes(type), function(key, item){
+            self.$inputs.eq(item).removeAttr('disabled');
+        });
     }
 });
 
 TimePicker.TYPES = ['小时', '分钟', '秒钟'];
+
+TimePicker.formatTypes = function(type){
+    if(type == null){
+        return [0, 1, 2];
+    }
+
+    return $.map($.makeArray(type), function(key, item){
+        if(/1|min/.test(type)){
+            return 1;
+        }else if(/2|sec/.test(type)){
+            return 2;
+        }
+
+        return 0;
+    });
+};
+
 return TimePicker;
+
 });

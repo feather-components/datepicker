@@ -1,0 +1,16 @@
+.ui3-picker{
+    z-index: 100000;
+    width: 195px;
+    font-size: 12px;
+    font-family: Tahoma,Helvetica Neue,Hiragino Sans GB,Microsoft Yahei,sans-serif;
+    color: #666;
+    border: 1px solid #5986E1;
+    background: #fff;
+    border-radius: 3px;
+    position: absolute;
+}
+
+.ui3-picker a{
+    text-decoration: none;
+    color: #666;
+}

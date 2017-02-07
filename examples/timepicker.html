@@ -8,20 +8,32 @@
     <script src="../bower_components/class/index.js"></script>
     <link rel="stylesheet" type="text/css" href="../bower_components/overlay/index.css" />
     <script src="../bower_components/overlay/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="../picker.css" />
+    <script src="../picker.js"></script>
     <link rel="stylesheet" type="text/css" href="../timepicker.css" />
     <script src="../timepicker.js"></script>
 </head>
 
 <body>
 <div id="test"></div>
+
+<input type="text" id="timepicker" readonly="readonly" style="position: absolute; top: 500px;"/>
 <script>
 var t = new $.fn.timepicker({
-    container: '#test'
+    container: '#test',
+    disabled: ['sec']
 });
 
-t.on('select', function(event, v){
-    console.log(v);
+t.on('select', function(event, v, a){
+    console.log(v, a);
 });
+
+$('#timepicker').timepicker({
+    disabled: ['hours']
+}).on('timepicker:select', function(event, v, a){
+    console.log(v, a);
+    console.log($(this).timepicker('instance').getTime());
+})
 </script>
 </body>
 </html>

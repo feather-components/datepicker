@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>datepicker example</title>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/class/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="../bower_components/overlay/index.css" />
+    <script src="../bower_components/overlay/index.js"></script>
+    <script src="../bower_components/util/util.js"></script>
+    <link rel="stylesheet" type="text/css" href="../picker.css" />
+    <script src="../picker.js"></script>
+    <link rel="stylesheet" type="text/css" href="../datepicker.css" />
+    <script src="../datepicker.js"></script>
+</head>
+
+<body>
+<input type="text" id="datepicker" readonly="readonly" style="position: absolute; top: 500px;"/>
+<script>
+$('#datepicker').datepicker({
+    minDate: '2017-02-02',
+    yearRange: '1999:2222'
+}).on('datepicker:select', function(event, v, a){
+    console.log(v, a);
+});
+</script>
+</body>
+</html>

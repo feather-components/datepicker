@@ -1,0 +1,96 @@
+.ui3-datepicker-header{
+    margin: 5px;
+    height: 28px;
+    background: #5986E1;
+    border-radius: 3px;
+    zoom: 1;
+}
+
+.ui3-datepicker-prev, .ui3-datepicker-next{
+    display: inline-block;
+    width: 25px;
+    font-family: consolas;
+    line-height: 28px;
+}
+
+.ui3-datepicker .ui3-datepicker-next, .ui3-datepicker .ui3-datepicker-prev, .ui3-datepicker-shower{
+    text-align: center;
+    height: 28px;
+    color: #fff;
+    float: left;
+}
+
+.ui3-datepicker-shower{
+    width: 135px;
+    height: 22px;
+    margin-top: 2px;
+    margin-top: "3px\9";
+    line-height: 22px;
+}
+
+.ui3-datepicker-shower select{
+    height: 22px;
+    width: 40px;
+    margin: 0px 5px;
+    border: 1px solid #5986e1;
+    box-shadow: inset 0 0 5px #a0a0a0;
+    border-radius: 3px;
+    outline: none;
+}
+
+.ui3-datepicker-range-selector{
+    width: 185px;
+}
+
+.ui3-datepicker .ui3-datepicker-year-selector{
+    width: 55px;
+}
+
+.ui3-datepicker ul, .ui3-datepicker li{
+    list-style: none;
+    padding: 0px;
+}
+
+.ui3-datepicker li{
+    width: 25px;
+    height: 25px;
+    display: inline;
+    display: inline-block;
+    margin: 0px 1px 2px 1px;
+    line-height: 25px;
+    text-align: center;
+}
+
+.ui3-datepicker-weeks{
+    height: 25px;
+    font-size: 14px;
+    margin: 0px 3px 5px 3px;
+}
+
+.ui3-datepicker-dates{
+    margin: 0px 3px 5px 3px;
+}
+
+.ui3-datepicker .ui3-datepicker-date{
+    cursor: pointer;
+    width: 23px;
+    height: 23px;
+    line-height: 23px;
+    border: 1px solid #E1E1E1;
+    border-radius: 3px;
+}
+
+.ui3-datepicker .ui3-datepicker-today, .ui3-datepicker-date:hover{
+    color: #FF8447;
+    border: 1px solid #FCE4DD;
+}
+
+.ui3-datepicker .ui3-datepicker-disabled, .ui3-datepicker .ui3-datepicker-disabled:hover{
+    background: #E1E1E1;
+    color: #999;
+    border: 1px solid #E1E1E1;
+}
+
+.ui3-datepicker .ui3-datepicker-disabled.ui3-datepicker-today{
+    color: #FF8447;
+}
