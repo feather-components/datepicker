@@ -1,12 +1,12 @@
 ;(function(factory){
 if(typeof define == 'function' && define.amd){
     //seajs or requirejs environment
-    define(['jquery', 'class', './picker'], factory);
+    define(['jquery', 'class', 'picker'], factory);
 }else if(typeof module === 'object' && typeof module.exports == 'object'){
     module.exports = factory(
         require('jquery'),
         require('class'),
-        require('./picker')
+        require('picker')
     );
 }else{
     factory(window.jQuery, window.jQuery.klass, window.jQuery.picker);

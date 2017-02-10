@@ -1,13 +1,13 @@
 ;(function(factory){
 if(typeof define == 'function' && define.amd){
     //seajs or requirejs environment
-    define(['jquery', 'class', 'util', './picker'], factory);
+    define(['jquery', 'class', 'util', 'picker'], factory);
 }else if(typeof module === 'object' && typeof module.exports == 'object'){
     module.exports = factory(
         require('jquery'),
         require('class'),
         require('util'),
-        require('./picker')
+        require('picker')
     );
 }else{
     factory(window.jQuery, window.jQuery.klass, window.util, window.jQuery.picker);
@@ -39,6 +39,8 @@ var DatePicker = Class.$factory('datepicker', Picker, {
 
         self.$picker.delegate('.ui3-datepicker-date', 'click', function(){
             self.trigger('select', self.date = $(this).attr('data-date'));
+            self.$dom && self.$dom.val(self.date);
+            self.close();
         });
 
         self.$picker.delegate('.ui3-datepicker-prev', 'click', function(){
