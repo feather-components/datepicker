@@ -1,5 +1,5 @@
 {
-  "name": "droplist",
+  "name": "datetimepicker",
   "desc": "日历插件",
   "version": "1.0.0",
   "dependencies": {

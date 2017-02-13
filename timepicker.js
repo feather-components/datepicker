@@ -16,23 +16,22 @@ if(typeof define == 'function' && define.amd){
 var TimePicker = Class.$factory('timepicker', Picker, {
     initialize: function(options){
         var options = $.extend({
-            selectedClassName: '',
-            disabled: []
+            disabled: [],
+            selectedClassName: 'ui3-timepicker-si-selected'
         }, options || {});
 
         this._super(options);
     },
 
     initEvent: function(){
-        var self = this;
+        var self = this, options = self.options;
 
         self._super.initEvent.call(self);
 
         self.$picker.delegate('.ui3-timepicker-si', 'click', function(){
             var $item = $(this), type = Number($item.attr('data-type')), val = $item.attr('data-value');
-
-            self.$picker.find('.ui3-timepicker-si').removeClass('ui3-timepicker-si-selected');
-            $item.addClass('ui3-timepicker-si-selected');
+            self.$picker.find('.ui3-timepicker-si').removeClass(options.selectedClassName);
+            $item.addClass(options.selectedClassName);
             self.$inputs.eq(type).val(val);
 
             type < 2 && self.$inputs.eq(type + 1).click();
@@ -85,7 +84,7 @@ var TimePicker = Class.$factory('timepicker', Picker, {
 
         for(var i = 0; i <= end; i++){
             txt = i < 10 ? '0' + i : i;
-            htmls.push('<a href="javascript:" class="ui3-timepicker-si ' + (i == v ? 'ui3-timepicker-si-selected' : '') + '" data-type="' + type + '" data-value="' + txt + '">' + txt + '</a>');
+            htmls.push('<a href="javascript:" class="ui3-timepicker-si ' + (i == v ? options.selectedClassName : '') + '" data-type="' + type + '" data-value="' + txt + '">' + txt + '</a>');
         }
 
         htmls = '<div class="ui3-timepicker-selector-title"><a href="javascript:" class="ui3-timepicker-selector-closer">&times;</a>' + TimePicker.TYPES[type] + '</div>'
