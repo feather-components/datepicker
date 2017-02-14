@@ -43,7 +43,6 @@ var DatePicker = Class.$factory('datepicker', Picker, {
             self.$dom && self.$dom.val(self.date);
             self.$picker.find('.ui3-datepicker-date').removeClass(options.selectedClassName);
             $(this).addClass(options.selectedClassName);
-            self.close();
         });
 
         self.$picker.delegate('.ui3-datepicker-prev', 'click', function(){
