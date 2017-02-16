@@ -11,16 +11,15 @@
     <script src="../bower_components/util/util.js"></script>
     <link rel="stylesheet" type="text/css" href="../bower_components/picker/index.css" />
     <script src="../bower_components/picker/index.js"></script>
-    <link rel="stylesheet" type="text/css" href="../datepicker.css" />
-    <script src="../datepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="../index.css" />
+    <script src="../index.js"></script>
 </head>
 
 <body>
 <input type="text" id="datepicker" readonly="readonly" style="position: absolute; top: 500px;"/>
 <script>
 $('#datepicker').datepicker({
-    minDate: '2017-02-02',
-    yearRange: '1999:2222'
+    minDate: '2017-02-02'
 }).on('datepicker:select', function(event, v, a){
     console.log(v, a);
 });
