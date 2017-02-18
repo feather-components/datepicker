@@ -16,9 +16,10 @@
 </head>
 
 <body>
-<input type="text" id="datepicker" readonly="readonly" style="position: absolute; top: 500px;"/>
+<input type="text" id="datepicker1" readonly="readonly"/>
+<input type="text" id="datepicker2" readonly="readonly"/>
 <script>
-$('#datepicker').datepicker({
+$('input').datepicker({
     minDate: '2017-02-02'
 }).on('datepicker:select', function(event, v, a){
     console.log(v, a);
