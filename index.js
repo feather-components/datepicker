@@ -20,14 +20,14 @@ var DatePicker = Class.$factory('datepicker', Picker, {
             minDate: null,
             yearRange: null,
             format: 'Y-m-d',
-            selectedClassName: ''
+            selectedClassName: 'ui3-datepicker-selected'
         }, options || {});
 
         var self = this;
 
         self.year = DatePicker.date('Y');
         self.month = DatePicker.date('n');
-        self.date = null;
+        self.date = DatePicker.date(options.format);
 
         self._super(options);
         self.toMonth();
@@ -117,7 +117,7 @@ var DatePicker = Class.$factory('datepicker', Picker, {
             className = ['ui3-datepicker-date'];    
             date = DatePicker.date(options.format, new Date(year, month, start));
 
-            today == date && className.push('ui3-datepicker-today');
+            //today == date && className.push('ui3-datepicker-today');
             self.date == date && className.push(options.selectedClassName);
 
             if(options.minDate && date < options.minDate || options.maxDate && date > options.maxDate){
@@ -157,7 +157,7 @@ var DatePicker = Class.$factory('datepicker', Picker, {
     },
 
     getDate: function(){
-        return self.date;
+        return this.date;
     },
 
     clean: function(){

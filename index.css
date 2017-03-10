@@ -80,7 +80,7 @@
     border-radius: 3px;
 }
 
-.ui3-datepicker .ui3-datepicker-today, .ui3-datepicker-date:hover{
+.ui3-datepicker .ui3-datepicker-selected, .ui3-datepicker-date:hover{
     color: #FF8447;
     border: 1px solid #FCE4DD;
 }
@@ -89,8 +89,4 @@
     background: #E1E1E1;
     color: #999;
     border: 1px solid #E1E1E1;
-}
-
-.ui3-datepicker .ui3-datepicker-disabled.ui3-datepicker-today{
-    color: #FF8447;
 }
