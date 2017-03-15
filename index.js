@@ -152,7 +152,7 @@ var DatePicker = Class.$factory('datepicker', Picker, {
         self.resetPosition();
     },
 
-    today: function(){
+    backToday: function(){
         this.setDate();
     },
 
