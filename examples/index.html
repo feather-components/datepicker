@@ -24,6 +24,10 @@ $('input').datepicker({
 }).on('datepicker:select', function(event, v, a){
     console.log(v, a);
 });
+
+setTimeout(function(){
+    $('input').datepicker('today');
+}, 3000);
 </script>
 </body>
 </html>

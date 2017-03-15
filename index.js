@@ -16,6 +16,7 @@ if(typeof define == 'function' && define.amd){
 var DatePicker = Class.$factory('datepicker', Picker, {
     initialize: function(options){
         var options = $.extend({
+            currentDate: null,
             maxDate: null,
             minDate: null,
             yearRange: null,
@@ -25,12 +26,8 @@ var DatePicker = Class.$factory('datepicker', Picker, {
 
         var self = this;
 
-        self.year = DatePicker.date('Y');
-        self.month = DatePicker.date('n');
-        self.date = DatePicker.date(options.format);
-
         self._super(options);
-        self.toMonth();
+        self.setDate(options.currentDate);
     },
 
     initEvent: function(){
@@ -117,7 +114,6 @@ var DatePicker = Class.$factory('datepicker', Picker, {
             className = ['ui3-datepicker-date'];    
             date = DatePicker.date(options.format, new Date(year, month, start));
 
-            //today == date && className.push('ui3-datepicker-today');
             self.date == date && className.push(options.selectedClassName);
 
             if(options.minDate && date < options.minDate || options.maxDate && date > options.maxDate){
@@ -156,15 +152,24 @@ var DatePicker = Class.$factory('datepicker', Picker, {
         self.resetPosition();
     },
 
+    today: function(){
+        this.setDate();
+    },
+
     getDate: function(){
         return this.date;
     },
 
-    clean: function(){
+    setDate: function(date){
+        if(typeof date == 'string' || !date){
+            date = new Date(date);
+        }
+
+        var time = date.getTime();
         var self = this;
 
-        self.date = null;
-        self.options.selectedClassName && self.$picker.find('.ui3-datepicker-date').removeClass(self.options.selectedClassName);
+        self.date = DatePicker.date(self.options.format, time);
+        self.toMonth(DatePicker.date('Y', time), DatePicker.date('n', time));
     }
 });
 
