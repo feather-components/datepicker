@@ -2,7 +2,7 @@ DatePicker 日期选择器
 ===============================
 
  
-###Options
+### Options
 
 *   container: 日历容器，一般为document.body
 *   dom：在指定元素上绑定日历组件，通常为input，如果不指定dom，则日历会直接显示在container中，不会消失，除非手动调用close
@@ -13,14 +13,14 @@ DatePicker 日期选择器
 *   selectedClassName: 选中某个日期时的样式
 
  
-###Events
+### Events
  
 *   switch(event, year, month)：年月切换时触发
 *   select(event, date)： 选择有效日期时触发，日期格式由dateformat决定
 *   open: 日历打开时触发
 *   close：日历关闭时触发 
 
-###Api
+### Api
 
 *   toPrevMonth: 切换至上个月
 *   toNextMonth: 切换至下个月
@@ -29,7 +29,7 @@ DatePicker 日期选择器
 *   close: 关闭日历
 *   destroy: 摧毁对象
  
-###Example
+### Example
 
 ```js
 $('#datepicker').datepicker().on('datepicker:select', function(event, date){
